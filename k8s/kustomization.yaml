@@ -1,0 +1,9 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: demo-danweb
+
+images:
+- name: williambr2022/view-demo-agenda-front
+  newName: williambr2022/view-demo-agenda-front
+  newTag: 42dcc7e0a9cf10ede0004f198bc1434cc5baff93
