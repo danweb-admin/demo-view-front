@@ -1,9 +1,9 @@
-FROM node:10-alpine as angular
+FROM node:16.15.0 as angular
 WORKDIR /app
 COPY package.json /app
-RUN npm install --silent
+RUN npm install --force
 COPY . .
-RUN npm run build --prod
+RUN npm run build
 
 FROM nginx:alpine
 VOLUME /var/cache/nginx
