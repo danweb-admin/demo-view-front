@@ -7,5 +7,5 @@ RUN npm run build --prod
 
 FROM nginx:alpine
 VOLUME /var/cache/nginx
-COPY --from=angular app/dist /usr/share/nginx/html
+COPY --from=angular app/dist/agenda-view-front /usr/share/nginx/html
 COPY ./config/nginx.conf /etc/nginx/conf.d/default.conf
