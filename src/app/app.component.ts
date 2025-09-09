@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { endOfMonth, format, startOfMonth } from 'date-fns';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Locacao } from './model/locacao';
+import { AppModalComponent } from './pages/app-modal.component';
 
 @Component({
   selector: 'app-root',
@@ -17,10 +18,7 @@ export class AppComponent implements OnInit{
   
   view: CalendarView = CalendarView.Month;
 
-  modalData: {
-    action: string;
-    event: CalendarEvent;
-  } | undefined;
+  modalData: { event: CalendarEvent<any> } | null = null;
   
   CalendarView = CalendarView;
   activeDayIsOpen: boolean = true;
@@ -66,8 +64,11 @@ export class AppComponent implements OnInit{
   }
   
   handleEvent(action: string, event: CalendarEvent) {
-    this.modalData = { event, action};
-    this.modal.open(this.modalContent, { size: 'sm' });
+    const modalRef = this.modal.open(AppModalComponent, {
+      size: 'lg',   // pode ser 'sm', 'lg', 'xl'
+      backdrop: 'static'
+    });
+    modalRef.componentInstance.event = event; // 👈 passa o evento como input
   }
 
   eventTimesChanged({
@@ -88,12 +89,14 @@ export class AppComponent implements OnInit{
     // this.handleEvent('Dropped or resized', event);
   }
 
+  
+
   loadEvents(dataInicial: string, dataFinal: string){
     this.appService.getCalendarView(dataInicial,dataFinal).subscribe(data => {
       this.events = [];
       
       
-      this.events = data.map((evento: { start: string | number | Date; end: string | number | Date; title: string, status: string; clienteFull: string; equipamentoFull: string; motoristaRecolhe: string; motoristaEntrega: string; color: string }): CalendarEvent<Locacao> => {
+      this.events = data.map((evento: { start: string | number | Date; end: string | number | Date; title: string, status: string; clienteFull: string; equipamentoFull: string; motoristaRecolhe: string; motoristaEntrega: string; color: string; cellPhone: string }): CalendarEvent<Locacao> => {
         let color_;
         
         color_ = { primary: evento.color, secondary: '#D2E3FC' }; // confirmada
@@ -107,6 +110,7 @@ export class AppComponent implements OnInit{
           meta: {
             status: evento.status == '1' ? 'Confirmada' : 'Pendente',
             clienteFull: evento.clienteFull,
+            cellPhone: evento.cellPhone,
             equipamentoFull: evento.equipamentoFull,
             motoristaRecolhe: evento.motoristaRecolhe,
             motoristaEntrega: evento.motoristaEntrega
