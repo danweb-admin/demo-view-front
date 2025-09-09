@@ -38,7 +38,7 @@ export class AppModalComponent implements OnInit {
 
         if (value === undefined)
             return ''
-        debugger
+        
         return value
         .replace(/\D/g, '') // remove tudo que não é dígito
         .replace(/^(\d{2})(\d)/, '($1) $2') // coloca parênteses no DDD

@@ -4,5 +4,6 @@ export interface Locacao{
     motoristaRecolhe: string;
     motoristaEntrega: string;
     status: string;
-    cellPhone: string
+    cellPhone: string;
+    endereco: string;
 }

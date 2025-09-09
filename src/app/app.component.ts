@@ -65,8 +65,9 @@ export class AppComponent implements OnInit{
   
   handleEvent(action: string, event: CalendarEvent) {
     const modalRef = this.modal.open(AppModalComponent, {
-      size: 'lg',   // pode ser 'sm', 'lg', 'xl'
-      backdrop: 'static'
+      backdrop: 'static',
+      windowClass: 'modal-60',
+      centered: true
     });
     modalRef.componentInstance.event = event; // 👈 passa o evento como input
   }
@@ -96,7 +97,7 @@ export class AppComponent implements OnInit{
       this.events = [];
       
       
-      this.events = data.map((evento: { start: string | number | Date; end: string | number | Date; title: string, status: string; clienteFull: string; equipamentoFull: string; motoristaRecolhe: string; motoristaEntrega: string; color: string; cellPhone: string }): CalendarEvent<Locacao> => {
+      this.events = data.map((evento: { start: string | number | Date; end: string | number | Date; title: string, status: string; clienteFull: string; equipamentoFull: string; motoristaRecolhe: string; motoristaEntrega: string; color: string; cellPhone: string; endereco: string }): CalendarEvent<Locacao> => {
         let color_;
         
         color_ = { primary: evento.color, secondary: '#D2E3FC' }; // confirmada
@@ -113,7 +114,8 @@ export class AppComponent implements OnInit{
             cellPhone: evento.cellPhone,
             equipamentoFull: evento.equipamentoFull,
             motoristaRecolhe: evento.motoristaRecolhe,
-            motoristaEntrega: evento.motoristaEntrega
+            motoristaEntrega: evento.motoristaEntrega,
+            endereco: evento.endereco
           }
         };
       });
