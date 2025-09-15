@@ -6,4 +6,5 @@ export interface Locacao{
     status: string;
     cellPhone: string;
     endereco: string;
+    note: string;
 }

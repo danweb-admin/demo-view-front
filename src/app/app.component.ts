@@ -97,7 +97,7 @@ export class AppComponent implements OnInit{
       this.events = [];
       
       
-      this.events = data.map((evento: { start: string | number | Date; end: string | number | Date; title: string, status: string; clienteFull: string; equipamentoFull: string; motoristaRecolhe: string; motoristaEntrega: string; color: string; cellPhone: string; endereco: string }): CalendarEvent<Locacao> => {
+      this.events = data.map((evento: { start: string | number | Date; end: string | number | Date; title: string, status: string; clienteFull: string; equipamentoFull: string; motoristaRecolhe: string; motoristaEntrega: string; color: string; cellPhone: string; endereco: string; note: string }): CalendarEvent<Locacao> => {
         let color_;
         
         color_ = { primary: evento.color, secondary: '#D2E3FC' }; // confirmada
@@ -115,7 +115,8 @@ export class AppComponent implements OnInit{
             equipamentoFull: evento.equipamentoFull,
             motoristaRecolhe: evento.motoristaRecolhe,
             motoristaEntrega: evento.motoristaEntrega,
-            endereco: evento.endereco
+            endereco: evento.endereco,
+            note: evento.note
           }
         };
       });
