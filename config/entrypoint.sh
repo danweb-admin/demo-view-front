@@ -1,6 +1,9 @@
 #!/bin/sh
-# Substitui as variáveis do template e gera o config.json final
-envsubst < /usr/share/nginx/html/assets/config.json > /usr/share/nginx/html/assets/config.json
+echo "🔧 Gerando config.json com API_URL=$API_URL"
 
-# Sobe o Nginx
+envsubst < /usr/share/nginx/html/assets/config.template.json > /usr/share/nginx/html/assets/config.json
+
+echo "📄 Conteúdo final do config.json:"
+cat /usr/share/nginx/html/assets/config.json
+
 exec nginx -g 'daemon off;'
