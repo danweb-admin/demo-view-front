@@ -23,7 +23,7 @@ COPY ./config/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=angular-build /app/dist/agenda-view-front /usr/share/nginx/html
 
 # Copia template de config (com variáveis)
-COPY ./config/config.json /usr/share/nginx/html/assets/config.json
+COPY ./src/assets/config.json /usr/share/nginx/html/assets/config.json
 
 # Copia entrypoint que gera config.json a partir das variáveis de ambiente
 COPY ./config/entrypoint.sh /entrypoint.sh
